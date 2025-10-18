@@ -196,7 +196,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Right Sidebar - Scores & Analysis */}
-          <div className="xl:col-span-1 space-y-4">
+          <div className="xl:col-span-1 space-y-2">
             {/* Prysm Score Card */}
             <PrysmScoreCard
               score={80}
@@ -205,8 +205,8 @@ export default function DashboardPage() {
               totalStocks={5000}
             />
 
-            {/* Score Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-1 gap-4">
+            {/* Score Cards - Compact Grid */}
+            <div className="space-y-2">
               <PerformanceCard onClick={() => console.log('Performance clicked')} />
               <ValuationCard onClick={() => console.log('Valuation clicked')} />
               <GrowthCard onClick={() => console.log('Growth clicked')} />

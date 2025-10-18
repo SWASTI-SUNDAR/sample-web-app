@@ -140,30 +140,24 @@ export function PrysmScoreCard({
   const chartData = polygonData || defaultPolygonData;
 
   return (
-    <div className={`bg-white rounded-lg border p-4 ${className}`}>
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold">Prysm Score</h3>
+    <div className={`bg-white rounded-lg border p-3 ${className}`}>
+      {/* Header and Score in one row */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-3">
+          <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full text-lg font-bold ${
+            getScoreBgColor(score)
+          } ${getScoreColor(score)}`}>
+            {score}
+          </div>
+          <div>
+            <h3 className="text-sm font-semibold">Prysm Score</h3>
+            <p className="text-xs text-gray-600">
+              Better than {percentile}% | Rank {rank.toLocaleString()}
+            </p>
+          </div>
+        </div>
         <div className="flex items-center space-x-1 text-amber-600">
-          <Trophy className="h-4 w-4" />
-          <span className="text-sm font-medium">#{rank}</span>
-        </div>
-      </div>
-
-      {/* Score Display - Circular */}
-      <div className="text-center flex-row gap-4 md:flex items-center justify-center">
-        <div className={`inline-flex items-center justify-center w-24 h-24 rounded-full text-4xl font-bold ${
-          getScoreBgColor(score)
-        } ${getScoreColor(score)} mb-3`}>
-          {score}
-        </div>
-        <div className="space-y-1">
-          <p className="text-sm text-gray-800">
-            Better than {percentile}%
-          </p>
-          <p className="text-xs text-gray-600">
-            Rank {rank.toLocaleString()}
-          </p>
+          <Trophy className="h-3 w-3" />
         </div>
       </div>
     </div>

@@ -101,21 +101,34 @@ export function ScoreCard({
   return (
     <div
       onClick={onClick}
-      className={`bg-white rounded-lg border p-4 transition-all hover:shadow-md ${
+      className={`bg-white rounded-lg border p-3 transition-all hover:shadow-md ${
         onClick ? 'cursor-pointer' : ''
       } ${className}`}
     >
-      {/* Header */}
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex-1">
-          <h4 className="text-sm font-medium text-gray-700 mb-1">
-            {title}
-          </h4>
-          {description && (
-            <p className="text-xs text-gray-500 line-clamp-2">
-              {description}
-            </p>
-          )}
+      {/* Row layout with circular value and info */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-3">
+          <div className={`inline-flex items-center justify-center w-10 h-10 rounded-full text-sm font-bold ${
+            tag?.color === 'green' ? 'bg-green-100 text-green-600' :
+            tag?.color === 'red' ? 'bg-red-100 text-red-600' :
+            tag?.color === 'blue' ? 'bg-blue-100 text-blue-600' :
+            tag?.color === 'yellow' ? 'bg-yellow-100 text-yellow-600' :
+            'bg-gray-100 text-gray-600'
+          }`}>
+            {value}
+          </div>
+          <div>
+            <h4 className="text-sm font-medium text-gray-700">
+              {title}
+            </h4>
+            {tag && (
+              <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${
+                getTagColors(tag.color)
+              }`}>
+                {tag.label}
+              </span>
+            )}
+          </div>
         </div>
         
         {trend !== 'neutral' && (
@@ -123,35 +136,12 @@ export function ScoreCard({
             trend === 'up' ? 'text-green-600' : 'text-red-600'
           }`}>
             {trend === 'up' ? (
-              <TrendingUp className="h-4 w-4" />
+              <TrendingUp className="h-3 w-3" />
             ) : (
-              <TrendingDown className="h-4 w-4" />
+              <TrendingDown className="h-3 w-3" />
             )}
           </div>
         )}
-      </div>
-
-      {/* Circular Value Display */}
-      <div className="text-center px-2 mb-3 flex-row justify-between md:flex items-center">
-       
-        
-        {tag && (
-          <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${
-            getTagColors(tag.color)
-          }`}>
-            {tag.label}
-          </span>
-        )}
-
-         <div className={`inline-flex items-center justify-center w-9 h-9 rounded-full text-xl font-bold mb-2 ${
-          tag?.color === 'green' ? 'bg-green-100 text-green-600' :
-          tag?.color === 'red' ? 'bg-red-100 text-red-600' :
-          tag?.color === 'blue' ? 'bg-blue-100 text-blue-600' :
-          tag?.color === 'yellow' ? 'bg-yellow-100 text-yellow-600' :
-          'bg-gray-100 text-gray-600'
-        }`}>
-          {value}
-        </div>
       </div>
     </div>
   );
