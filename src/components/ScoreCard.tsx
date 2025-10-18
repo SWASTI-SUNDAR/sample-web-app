@@ -131,11 +131,9 @@ export function ScoreCard({
         )}
       </div>
 
-      {/* Value */}
-      <div className="mb-3">
-        <div className="text-2xl font-bold text-gray-900 mb-1">
-          {value}
-        </div>
+      {/* Circular Value Display */}
+      <div className="text-center px-2 mb-3 flex-row justify-between md:flex items-center">
+       
         
         {tag && (
           <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${
@@ -144,14 +142,17 @@ export function ScoreCard({
             {tag.label}
           </span>
         )}
-      </div>
 
-      {/* Sparkline */}
-      {sparklineData && sparklineData.length > 0 && (
-        <div className="flex justify-center">
-          <Sparkline data={sparklineData} trend={trend} />
+         <div className={`inline-flex items-center justify-center w-9 h-9 rounded-full text-xl font-bold mb-2 ${
+          tag?.color === 'green' ? 'bg-green-100 text-green-600' :
+          tag?.color === 'red' ? 'bg-red-100 text-red-600' :
+          tag?.color === 'blue' ? 'bg-blue-100 text-blue-600' :
+          tag?.color === 'yellow' ? 'bg-yellow-100 text-yellow-600' :
+          'bg-gray-100 text-gray-600'
+        }`}>
+          {value}
         </div>
-      )}
+      </div>
     </div>
   );
 }

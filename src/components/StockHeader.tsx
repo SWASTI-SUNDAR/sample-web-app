@@ -34,10 +34,10 @@ export function StockHeader({
   };
 
   return (
-    <div className="bg-white border-b p-6">
+    <div className="bg-white border-b  ">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         {/* Left side - Stock info */}
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-col space-y-2 mt-10 lg:mt-10  ">
           <div className="flex items-center space-x-2">
             <h1 className="text-2xl font-bold text-gray-900">{companyName}</h1>
             <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">

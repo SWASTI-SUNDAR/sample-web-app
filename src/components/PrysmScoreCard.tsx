@@ -140,7 +140,7 @@ export function PrysmScoreCard({
   const chartData = polygonData || defaultPolygonData;
 
   return (
-    <div className={`bg-white rounded-lg border p-4 lg:p-6 ${className}`}>
+    <div className={`bg-white rounded-lg border p-4 ${className}`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold">Prysm Score</h3>
@@ -150,73 +150,21 @@ export function PrysmScoreCard({
         </div>
       </div>
 
-      {/* Score Display */}
-      <div className="text-center mb-6">
-        <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full text-3xl font-bold ${
+      {/* Score Display - Circular */}
+      <div className="text-center flex-row gap-4 md:flex items-center justify-center">
+        <div className={`inline-flex items-center justify-center w-24 h-24 rounded-full text-4xl font-bold ${
           getScoreBgColor(score)
-        } ${getScoreColor(score)} mb-2`}>
+        } ${getScoreColor(score)} mb-3`}>
           {score}
         </div>
         <div className="space-y-1">
-          <p className="text-sm text-gray-600">
-            Better than {percentile}% of stocks
+          <p className="text-sm text-gray-800">
+            Better than {percentile}%
           </p>
-          <p className="text-xs text-gray-500">
-            Rank {rank.toLocaleString()} of {totalStocks.toLocaleString()}
+          <p className="text-xs text-gray-600">
+            Rank {rank.toLocaleString()}
           </p>
         </div>
-      </div>
-
-      {/* Progress Bar */}
-      <div className="mb-6">
-        <div className="flex justify-between text-xs text-gray-500 mb-1">
-          <span>0</span>
-          <span>50</span>
-          <span>100</span>
-        </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
-          <div 
-            className={`h-2 rounded-full transition-all duration-300 ${
-              score >= 80 ? 'bg-green-500' :
-              score >= 60 ? 'bg-blue-500' :
-              score >= 40 ? 'bg-yellow-500' : 'bg-red-500'
-            }`}
-            style={{ width: `${score}%` }}
-          />
-        </div>
-      </div>
-
-      {/* Radar Chart */}
-      <div className="flex justify-center mb-4">
-        <RadarChart data={chartData} />
-      </div>
-
-      {/* Score Breakdown */}
-      <div className="space-y-2">
-        <h4 className="text-sm font-medium text-gray-700">Score Breakdown:</h4>
-        {chartData.labels.map((label, index) => (
-          <div key={label} className="flex items-center justify-between text-sm">
-            <span className="text-gray-600">{label}</span>
-            <div className="flex items-center space-x-2">
-              <div className="w-12 bg-gray-200 rounded-full h-1.5">
-                <div 
-                  className="bg-blue-500 h-1.5 rounded-full transition-all duration-300"
-                  style={{ width: `${chartData.values[index]}%` }}
-                />
-              </div>
-              <span className="text-gray-900 min-w-[2rem] text-right">
-                {chartData.values[index]}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Footer */}
-      <div className="mt-6 pt-4 border-t text-center">
-        <p className="text-xs text-gray-500">
-          Updated daily • Based on 50+ metrics
-        </p>
       </div>
     </div>
   );

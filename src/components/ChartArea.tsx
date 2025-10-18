@@ -69,6 +69,7 @@ export function ChartArea({
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    resizeDelay: 0,
     plugins: {
       legend: {
         display: data.datasets.length > 1,
@@ -98,6 +99,8 @@ export function ChartArea({
         ticks: {
           maxTicksLimit: 8,
           color: '#6B7280',
+          autoSkip: true,
+          maxRotation: 0,
         },
       },
       y: {
