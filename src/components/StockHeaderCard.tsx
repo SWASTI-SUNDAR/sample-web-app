@@ -56,25 +56,25 @@ export function StockHeaderCard({
             </div>
           )}
           <div>
-            <h1 className="text-xl font-semibold text-gray-900">
-              {name}
-            </h1>
+            <h1 className="text-xl font-semibold text-gray-900">{name}</h1>
             <p className="text-sm text-gray-600">{subtitle}</p>
           </div>
         </div>
-        
+
         {/* Action buttons */}
         <div className="flex items-center space-x-1">
           <button
             onClick={onWatchlist}
             className={`p-2 rounded-lg transition-colors ${
-              isWatchlisted 
-                ? 'bg-yellow-100 text-yellow-600' 
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              isWatchlisted
+                ? "bg-yellow-100 text-yellow-600"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
             }`}
             title="Favorite"
           >
-            <Star className={`h-4 w-4 ${isWatchlisted ? 'fill-current' : ''}`} />
+            <Star
+              className={`h-4 w-4 ${isWatchlisted ? "fill-current" : ""}`}
+            />
           </button>
           <button
             onClick={onShare}
@@ -107,7 +107,7 @@ export function StockHeaderCard({
           <div className="bg-gray-50 rounded-lg p-3">
             <div className="flex items-center space-x-1 mb-1">
               <BarChart3 className="h-3 w-3 text-gray-600" />
-              <span className="text-xs text-gray-700">Day's Range</span>
+              <span className="text-xs text-gray-700">Day&apos;s Range</span>
             </div>
             <div className="text-sm font-medium text-gray-800">
               ${dayRange.low} - ${dayRange.high}
@@ -122,9 +122,7 @@ export function StockHeaderCard({
               <Building className="h-3 w-3 text-gray-600" />
               <span className="text-xs text-gray-700">Industry</span>
             </div>
-            <div className="text-sm font-medium text-gray-800">
-              {industry}
-            </div>
+            <div className="text-sm font-medium text-gray-800">{industry}</div>
           </div>
         )}
 
@@ -135,9 +133,7 @@ export function StockHeaderCard({
               <TrendingUp className="h-3 w-3 text-green-500" />
               <span className="text-xs text-gray-700">CAGR</span>
             </div>
-            <div className="text-sm font-medium text-green-600">
-              {cagr}%
-            </div>
+            <div className="text-sm font-medium text-green-600">{cagr}%</div>
           </div>
         )}
 
@@ -153,7 +149,6 @@ export function StockHeaderCard({
             </div>
           </div>
         )}
-
       </div>
 
       {/* Tags */}
@@ -162,13 +157,13 @@ export function StockHeaderCard({
           <span
             key={index}
             className={`px-3 py-1 text-sm font-medium rounded-full ${
-              tag.color || 'bg-blue-100 text-blue-800'
+              tag.color || "bg-blue-100 text-blue-800"
             }`}
           >
             {tag.label}
           </span>
         ))}
-        
+
         {/* Latest News as Tags */}
         {latestNews && latestNews.length > 0 && (
           <span className="px-3 py-1 text-sm font-medium rounded-full bg-red-100 text-red-800 flex items-center space-x-1">
