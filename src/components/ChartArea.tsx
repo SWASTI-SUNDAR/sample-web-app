@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,9 +11,9 @@ import {
   Tooltip,
   Legend,
   Filler,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import { Download, Plus, Settings, Maximize2 } from 'lucide-react';
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { Download, Plus, Settings, Maximize2 } from "lucide-react";
 
 ChartJS.register(
   CategoryScale,
@@ -62,10 +62,15 @@ export function ChartArea({
   onToggleIndicator,
   onExport,
   onCompare,
-  loading = false
+  loading = false,
 }: ChartAreaProps) {
   const [isFullscreen, setIsFullscreen] = useState(false);
-  
+  const [lastUpdated, setLastUpdated] = useState<string>("");
+
+  useEffect(() => {
+    setLastUpdated(new Date().toLocaleTimeString());
+  }, [data]);
+
   const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -73,18 +78,18 @@ export function ChartArea({
     plugins: {
       legend: {
         display: data.datasets.length > 1,
-        position: 'top' as const,
+        position: "top" as const,
       },
       tooltip: {
-        mode: 'index' as const,
+        mode: "index" as const,
         intersect: false,
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        titleColor: 'white',
-        bodyColor: 'white',
-        borderColor: '#3B82F6',
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        titleColor: "white",
+        bodyColor: "white",
+        borderColor: "#3B82F6",
         borderWidth: 1,
         callbacks: {
-          label: function(context: any) {
+          label: function (context: any) {
             return `${context.dataset.label}: $${context.parsed.y.toFixed(2)}`;
           },
         },
@@ -98,27 +103,27 @@ export function ChartArea({
         },
         ticks: {
           maxTicksLimit: 8,
-          color: '#6B7280',
+          color: "#6B7280",
           autoSkip: true,
           maxRotation: 0,
         },
       },
       y: {
         display: true,
-        position: 'right' as const,
+        position: "right" as const,
         grid: {
-          color: 'rgba(107, 114, 128, 0.1)',
+          color: "rgba(107, 114, 128, 0.1)",
         },
         ticks: {
-          color: '#6B7280',
-          callback: function(value: string | number) {
-            return '$' + Number(value).toFixed(2);
+          color: "#6B7280",
+          callback: function (value: string | number) {
+            return "$" + Number(value).toFixed(2);
           },
         },
       },
     },
     interaction: {
-      mode: 'index' as const,
+      mode: "index" as const,
       intersect: false,
     },
     elements: {
@@ -130,7 +135,12 @@ export function ChartArea({
   };
 
   const availableIndicators = [
-    'MA20', 'MA50', 'RSI', 'MACD', 'Bollinger Bands', 'Volume'
+    "MA20",
+    "MA50",
+    "RSI",
+    "MACD",
+    "Bollinger Bands",
+    "Volume",
   ];
 
   if (loading) {
@@ -139,8 +149,11 @@ export function ChartArea({
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold">Price Chart</h2>
           <div className="flex space-x-2">
-            {timeframes.map(tf => (
-              <div key={tf} className="px-3 py-1 bg-gray-100 rounded animate-pulse h-8 w-12" />
+            {timeframes.map((tf) => (
+              <div
+                key={tf}
+                className="px-3 py-1 bg-gray-100 rounded animate-pulse h-8 w-12"
+              />
             ))}
           </div>
         </div>
@@ -157,17 +170,17 @@ export function ChartArea({
         {/* Chart Header */}
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-sm font-semibold">{symbol} Chart</h2>
-          
+
           {/* Timeframe buttons */}
           <div className="flex space-x-1 bg-gray-100 rounded p-1">
-            {timeframes.map(tf => (
+            {timeframes.map((tf) => (
               <button
                 key={tf}
                 onClick={() => onChangeTimeframe(tf)}
                 className={`px-2 py-1 text-xs rounded transition-colors ${
                   activeTimeframe === tf
-                    ? 'bg-white text-blue-600 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? "bg-white text-blue-600 shadow-sm"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
               >
                 {tf}
@@ -182,9 +195,11 @@ export function ChartArea({
         </div>
 
         {/* Chart Footer */}
-        <div className="mt-2 text-xs text-gray-500 text-center">
-          Last updated: {new Date().toLocaleTimeString()}
-        </div>
+        {lastUpdated && (
+          <div className="mt-2 text-xs text-gray-500 text-center">
+            Last updated: {lastUpdated}
+          </div>
+        )}
       </div>
     </div>
   );
